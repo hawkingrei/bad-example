@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "admin_client.go",
+        "caches.go",
+        "client.go",
+        "rpc.go",
+        "scanner.go",
+    ],
+    importmap = "go-common/vendor/github.com/tsuna/gohbase",
+    importpath = "github.com/tsuna/gohbase",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/cznic/b:go_default_library",
+        "//vendor/github.com/golang/protobuf/proto:go_default_library",
+        "//vendor/github.com/sirupsen/logrus:go_default_library",
+        "//vendor/github.com/tsuna/gohbase/hrpc:go_default_library",
+        "//vendor/github.com/tsuna/gohbase/pb:go_default_library",
+        "//vendor/github.com/tsuna/gohbase/region:go_default_library",
+        "//vendor/github.com/tsuna/gohbase/zk:go_default_library",
+        "//vendor/golang.org/x/time/rate:go_default_library",
+    ],
+)

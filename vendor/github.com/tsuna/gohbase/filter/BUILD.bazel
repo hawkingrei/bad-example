@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "comparator.go",
+        "filter.go",
+    ],
+    importmap = "go-common/vendor/github.com/tsuna/gohbase/filter",
+    importpath = "github.com/tsuna/gohbase/filter",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/golang/protobuf/proto:go_default_library",
+        "//vendor/github.com/tsuna/gohbase/pb:go_default_library",
+    ],
+)

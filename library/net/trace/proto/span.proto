@@ -1,0 +1,44 @@
+syntax = "proto3";
+package dapper.trace;
+
+option go_package = "proto";
+
+message Tag {
+  enum Kind {
+    STRING = 0;
+    INT = 1;
+    BOOL = 2;
+    FLOAT = 3;
+  }
+  string key = 1;
+  Kind kind = 2;
+  bytes value = 3;
+}
+
+message Log {
+  enum Kind {
+    STRING = 0;
+    INT = 1;
+    BOOL = 2;
+    FLOAT = 3;
+  }
+  string key = 1;
+  Kind kind = 2;
+  bytes value = 3;
+  int64 timestamp = 4;
+}
+
+message Span {
+  string family = 1;
+  string title = 2;
+  string caller = 3;
+  uint64 trace_id = 4;
+  uint64 span_id = 5;
+  uint64 parent_span_id = 6;
+  int32  level = 7;
+  int64 start_at = 8;
+  int64 finish_at = 9;
+  float sample = 10;
+  repeated Tag tags = 11;
+  repeated Log logs = 12;
+}

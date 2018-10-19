@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "basic_auth.go",
+        "impersonation.go",
+        "labels.go",
+        "main.go",
+        "pipelines.go",
+        "projects.go",
+        "repository_files.go",
+    ],
+    importmap = "go-common/vendor/github.com/xanzy/go-gitlab/examples",
+    importpath = "github.com/xanzy/go-gitlab/examples",
+    visibility = ["//visibility:private"],
+    deps = ["//vendor/github.com/xanzy/go-gitlab:go_default_library"],
+)
+
+go_binary(
+    name = "examples",
+    embed = [":go_default_library"],
+    visibility = ["//visibility:public"],
+)

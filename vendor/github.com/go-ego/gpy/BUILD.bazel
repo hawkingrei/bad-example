@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "doc.go",
+        "phonetic_symbol.go",
+        "pinyin.go",
+        "pinyin_dict.go",
+    ],
+    importmap = "go-common/vendor/github.com/go-ego/gpy",
+    importpath = "github.com/go-ego/gpy",
+    visibility = ["//visibility:public"],
+)
