@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_package = "pleiades.business.service.season.episode.v1";
+package pgc.service.season.episode.v1;
+option java_multiple_files = true;
+option go_package = "v1";
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "go-common/app/service/openplatform/pgc-season/api/grpc/episode/v1/model.proto";
+
+// EpisodeInfoReply ep response
+message EpisodeInfoReply {
+    // infos
+    map<int32, EpisodeInfoProto> infos = 1;
+}

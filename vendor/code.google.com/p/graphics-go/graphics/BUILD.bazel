@@ -30,3 +30,23 @@ go_test(
     embed = [":go_default_library"],
     deps = ["//vendor/code.google.com/p/graphics-go/graphics/graphicstest:go_default_library"],
 )
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [
+        ":package-srcs",
+        "//vendor/code.google.com/p/graphics-go/graphics/convolve:all-srcs",
+        "//vendor/code.google.com/p/graphics-go/graphics/detect:all-srcs",
+        "//vendor/code.google.com/p/graphics-go/graphics/graphicstest:all-srcs",
+        "//vendor/code.google.com/p/graphics-go/graphics/interp:all-srcs",
+    ],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
+)

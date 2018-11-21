@@ -1,3 +1,7 @@
+load(
+    "@io_bazel_rules_go//proto:def.bzl",
+    "go_proto_library",
+)
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 go_library(
@@ -6,8 +10,37 @@ go_library(
         "gen.go",
         "plugin.pb.go",
     ],
+    embed = [":plugin_go_proto"],
     importmap = "go-common/vendor/github.com/docker/docker/api/types/swarm/runtime",
     importpath = "github.com/docker/docker/api/types/swarm/runtime",
     visibility = ["//visibility:public"],
-    deps = ["//vendor/github.com/gogo/protobuf/proto:go_default_library"],
+    deps = ["@com_github_gogo_protobuf//proto:go_default_library"],
+)
+
+proto_library(
+    name = "plugin_proto",
+    srcs = ["plugin.proto"],
+    tags = ["automanaged"],
+)
+
+go_proto_library(
+    name = "plugin_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_proto"],
+    importpath = "go-common/vendor/github.com/docker/docker/api/types/swarm/runtime",
+    proto = ":plugin_proto",
+    tags = ["automanaged"],
+)
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [":package-srcs"],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
 )

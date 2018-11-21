@@ -44,3 +44,30 @@ go_library(
         "//vendor/github.com/syndtr/goleveldb/leveldb/util:go_default_library",
     ],
 )
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [
+        ":package-srcs",
+        "//vendor/github.com/syndtr/goleveldb/leveldb/cache:all-srcs",
+        "//vendor/github.com/syndtr/goleveldb/leveldb/comparer:all-srcs",
+        "//vendor/github.com/syndtr/goleveldb/leveldb/errors:all-srcs",
+        "//vendor/github.com/syndtr/goleveldb/leveldb/filter:all-srcs",
+        "//vendor/github.com/syndtr/goleveldb/leveldb/iterator:all-srcs",
+        "//vendor/github.com/syndtr/goleveldb/leveldb/journal:all-srcs",
+        "//vendor/github.com/syndtr/goleveldb/leveldb/memdb:all-srcs",
+        "//vendor/github.com/syndtr/goleveldb/leveldb/opt:all-srcs",
+        "//vendor/github.com/syndtr/goleveldb/leveldb/storage:all-srcs",
+        "//vendor/github.com/syndtr/goleveldb/leveldb/table:all-srcs",
+        "//vendor/github.com/syndtr/goleveldb/leveldb/util:all-srcs",
+    ],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
+)

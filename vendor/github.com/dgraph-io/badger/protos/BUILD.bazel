@@ -1,3 +1,7 @@
+load(
+    "@io_bazel_rules_go//proto:def.bzl",
+    "go_proto_library",
+)
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 go_library(
@@ -6,8 +10,54 @@ go_library(
         "backup.pb.go",
         "manifest.pb.go",
     ],
+    embed = [
+        ":backup_go_proto",
+        ":manifest_go_proto",
+    ],
     importmap = "go-common/vendor/github.com/dgraph-io/badger/protos",
     importpath = "github.com/dgraph-io/badger/protos",
     visibility = ["//visibility:public"],
-    deps = ["//vendor/github.com/golang/protobuf/proto:go_default_library"],
+    deps = ["@com_github_golang_protobuf//proto:go_default_library"],
+)
+
+proto_library(
+    name = "backup_proto",
+    srcs = ["backup.proto"],
+    tags = ["automanaged"],
+)
+
+go_proto_library(
+    name = "backup_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_proto"],
+    importpath = "go-common/vendor/github.com/dgraph-io/badger/protos",
+    proto = ":backup_proto",
+    tags = ["automanaged"],
+)
+
+proto_library(
+    name = "manifest_proto",
+    srcs = ["manifest.proto"],
+    tags = ["automanaged"],
+)
+
+go_proto_library(
+    name = "manifest_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_proto"],
+    importpath = "go-common/vendor/github.com/dgraph-io/badger/protos",
+    proto = ":manifest_proto",
+    tags = ["automanaged"],
+)
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [":package-srcs"],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
 )

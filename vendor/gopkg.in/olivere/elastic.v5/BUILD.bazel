@@ -412,3 +412,37 @@ go_test(
     embed = [":go_default_library"],
     deps = ["//vendor/github.com/fortytw2/leaktest:go_default_library"],
 )
+
+go_test(
+    name = "go_default_xtest",
+    srcs = [
+        "example_test.go",
+        "search_queries_prefix_example_test.go",
+        "search_queries_wildcard_test.go",
+    ],
+    tags = ["automanaged"],
+    deps = ["//vendor/gopkg.in/olivere/elastic.v5:go_default_library"],
+)
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [
+        ":package-srcs",
+        "//vendor/gopkg.in/olivere/elastic.v5/cluster-test:all-srcs",
+        "//vendor/gopkg.in/olivere/elastic.v5/config:all-srcs",
+        "//vendor/gopkg.in/olivere/elastic.v5/recipes/bulk_insert:all-srcs",
+        "//vendor/gopkg.in/olivere/elastic.v5/recipes/bulk_processor:all-srcs",
+        "//vendor/gopkg.in/olivere/elastic.v5/recipes/connect:all-srcs",
+        "//vendor/gopkg.in/olivere/elastic.v5/recipes/sliced_scroll:all-srcs",
+        "//vendor/gopkg.in/olivere/elastic.v5/uritemplates:all-srcs",
+    ],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
+)

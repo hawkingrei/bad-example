@@ -1,2 +1,3 @@
+.PHONY: build 
 build:
 	bazel build //app/...

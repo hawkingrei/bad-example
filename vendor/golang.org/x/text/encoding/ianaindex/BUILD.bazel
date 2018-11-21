@@ -39,3 +39,27 @@ go_test(
         "//vendor/golang.org/x/text/encoding/unicode:go_default_library",
     ],
 )
+
+go_test(
+    name = "go_default_xtest",
+    srcs = ["example_test.go"],
+    tags = ["automanaged"],
+    deps = [
+        "//vendor/golang.org/x/text/encoding/charmap:go_default_library",
+        "//vendor/golang.org/x/text/encoding/ianaindex:go_default_library",
+    ],
+)
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [":package-srcs"],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
+)

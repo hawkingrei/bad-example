@@ -67,3 +67,24 @@ go_library(
         "//conditions:default": [],
     }),
 )
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [
+        ":package-srcs",
+        "//vendor/github.com/dgraph-io/badger/options:all-srcs",
+        "//vendor/github.com/dgraph-io/badger/protos:all-srcs",
+        "//vendor/github.com/dgraph-io/badger/skl:all-srcs",
+        "//vendor/github.com/dgraph-io/badger/table:all-srcs",
+        "//vendor/github.com/dgraph-io/badger/y:all-srcs",
+    ],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
+)

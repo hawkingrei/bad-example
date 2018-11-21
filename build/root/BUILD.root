@@ -20,7 +20,6 @@ filegroup(
         ":package-srcs",
         "//app:all-srcs",
         "//build:all-srcs",
-        "//library:all-srcs",
         "//vendor:all-srcs",
     ],
     tags = ["automanaged"],

@@ -10,3 +10,20 @@ go_library(
     importpath = "github.com/opencontainers/image-spec/specs-go",
     visibility = ["//visibility:public"],
 )
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [
+        ":package-srcs",
+        "//vendor/github.com/opencontainers/image-spec/specs-go/v1:all-srcs",
+    ],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
+)

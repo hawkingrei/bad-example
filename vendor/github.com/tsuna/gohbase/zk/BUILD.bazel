@@ -7,9 +7,23 @@ go_library(
     importpath = "github.com/tsuna/gohbase/zk",
     visibility = ["//visibility:public"],
     deps = [
-        "//vendor/github.com/golang/protobuf/proto:go_default_library",
         "//vendor/github.com/samuel/go-zookeeper/zk:go_default_library",
         "//vendor/github.com/sirupsen/logrus:go_default_library",
         "//vendor/github.com/tsuna/gohbase/pb:go_default_library",
+        "@com_github_golang_protobuf//proto:go_default_library",
     ],
+)
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [":package-srcs"],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
 )
